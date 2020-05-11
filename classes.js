@@ -30,7 +30,19 @@
 */
 
 //Code Here
-
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+  }
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`
+  }
+}
+const ben = new Employee("Ben", "Doggett", "bdog@gmail.com", 27);
+console.log(ben.makeWidget());
 
 ////////// PROBLEM 2 //////////
 
@@ -48,7 +60,21 @@
 */
 
 //Code Here
+class Manager extends Employee {
+  constructor(first_name, last_name, email, age, reports) {
+    super(first_name, last_name, email, age)
+    this.reports = [];
+  }
+  hire(employee) {
+    return this.reports.push(employee);
+  }
+  fire(index) {
+    return this.reports.splice(index, 1)
+  }
+}
 
+let bob = new Manager("Bob", "Burger", "bobBurgerisDaBomb@gmail.com", 42);
+// bob.hire();
 
 ////////// PROBLEM 3 //////////
 
@@ -72,7 +98,51 @@
 */
 
 //Code Here
+class ProgressiveManager extends Manager {
+  constructor(first_name, last_name, email, age, reports) {
+    super(first_name, last_name, email, age, reports);
+    this.title = "Not a manager";
+    this.bonus = 0;
+  }
+  titleChange() {
+    if(this.reports.length === 0) {
+      this.title = "Not a manager"
+      return this.title;
+    }
+    else if (this.reports.length >= 1 && this.reports.length <= 3) {
+      this.title = "Barely Manager"
+      return this.title;
+    }
+    else if (this.reports.length >= 4 && this.reports.length <= 10) {
+      this.title = "Mostly Manager"
+      return this.title;
+    }
+    else if (this.reports.length >= 11 && this.reports.length <= 50) {
+      this.title = "Manager"
+      return this.title;
+    }
+    else if(this.reports.length >= 51 && this.reports.length <= 100) {
+      this.title = "Manager Plus"
+      return this.title;
+    }
+    else if (this.reports.length >= 101) {
+      this.title = "Bestest Manager"
+      return this.title;
+    }
+  }
 
+  hire(employee) {
+    super.hire(employee)
+    this.titleChange();
+  }
+
+  fire(index) {
+    super.fire(index)
+    this.titleChange()
+    this.bonus += 100;
+  }
+
+}
 
 
 ////////// PROBLEM 4 - Black Diamond //////////
