@@ -93,17 +93,23 @@ function makeCounter() {
 
 function counterFactory(value) {
   // Code here.
-
   return {
-
+    inc: function() {
+      value = value + 1;
+      return value
+    },
+    dec: function() {
+      value = value - 1;
+      return value;
+    }
   };
 }
 
 counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
+counter.inc() // 11
+counter.inc() // 12
+counter.inc() // 13
+counter.dec() // 12
 
 
 
@@ -119,9 +125,12 @@ function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
 
   // code message function here.
+  function message() {
+    return `${welcomeText} ${firstname} ${lastname}.`
+  }
 
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
 var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
@@ -150,8 +159,13 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
+    publicMethod: function() {
+      return privateMethod();
+    }
   };
 })();
+
+module.publicMethod()
 
 
 
@@ -169,6 +183,13 @@ function secretNumber() {
 
   return {
     // Code here
+    addToSecret: function(num) {
+      secret = secret + num;
+      return secret;
+    },
+    takeAwayFromSecret: function(away) {
+      return secret -= away;
+    }
   };
 }
 
@@ -194,9 +215,11 @@ function secretNumber() {
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
+    const time = i;
     setTimeout(function() {
-      console.log(i);
+      console.log(time);
     }, i * 1000);
   }
 }
 timeOutCounter();
+
