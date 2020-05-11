@@ -169,5 +169,26 @@ class ProgressiveManager extends Manager {
 */
 
 //Code Here
+class Machine {
+  constructor(widgets_made_count, wear_and_tear_count, needs_reboot) {
+    this.widgets_made_count = widgets_made_count;
+    this.wear_and_tear_count = wear_and_tear_count;
+    this.needs_reboot = needs_reboot;
+  }
 
+  makeWidget(num) {
+    this.widgets_made_count = this.widgets_made_count + num;
+    if (this.widgets_made_count % 50 === 0) {
+      this.wear_and_tear_count += 1;
+    }
+  }
+  
+  fixMachine() {
+    this.needs_reboot = true;
+  }
+
+  reboot() {
+
+  }
+}
 
